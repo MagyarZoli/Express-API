@@ -14,12 +14,18 @@ router.use(express.urlencoded({extended: false}));
 
 mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.gd7v733.mongodb.net/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`)
   .then(() => console.log(`Connected to MongoDB`))
-  .catch(err => console.log(err));
+  .catch(err => console.error(err));
 
-router.route("/auth/register")
-  .post(UserController.register);
+router.route("/signup")
+  .get((req, res) => {
+    res.render("signup");
+  })
+  .post(UserController.signup);
 
 router.route("/login")
+  .get((req, res) => {
+    res.render("login");
+  })
   .post(UserController.login);
 
 router.route("/")
