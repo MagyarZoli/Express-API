@@ -7,7 +7,7 @@
 # shellcheck disable=SC2164
 # shellcheck disable=SC2218
 
-SRC=("services" "models" "controllers" "exceptions")
+SRC=("services" "models" "controllers" "middleware" "exceptions")
 
 function makeSrcDir() {
   mkdir src
