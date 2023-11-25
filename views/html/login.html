@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express-API</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a class="home" href="/">Home</a></li>
+        <li><a class="login" href="/login">Log in</a></li>
+        <li><a class="signup" href="/signup">Sign up</a></li>
+      </ul>
+    </nav>
+    <form>
+      <h2>Log in</h2>
+      <input type="text" id="email" name="email">
+      <label for="email">Email</label><br>
+      <input type="password" id="password" name="password">
+      <label for="password">Password</label>
+      <div class="login error"></div>
+    </form>
+    <main>
+      <a class="google" href="/auth/google">Google+</a>
+      <a class="github" href="/auth/github">Github</a>
+      <a class="facebook" href="/auth/facebook">Facebook</a>
+    </main>
+    <script src="/js/login.js"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+- const email = {"type": "text", "id": "email", "name": "email"};
+- const password = {"type": "password", "id": "password", "name": "password"};
+
+  doctype html
+  html(lang="en")
+    include parials/header
+    body
+      include parials/navbar
+      form
+        h2 Log in
+        input&attributes(email)
+        label(for=email.id) Email
+        br
+        input&attributes(password)
+        label(for=password.id) Password
+        div(class="login error")
+      include parials/oath
+      script(src="/js/login.js")
