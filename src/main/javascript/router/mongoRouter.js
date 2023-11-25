@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config();
 const cookieParser = require("cookie-parser");
 
 const userModel = require("../models/UserModel");
@@ -9,8 +9,6 @@ const userMiddleware = require("../middleware/userMiddleware");
 const authRouter = require("./authRouter");
 
 const router = express.Router();
-
-dotenv.config();
 
 router.use(express.json());
 router.use(express.urlencoded({extended: false}));

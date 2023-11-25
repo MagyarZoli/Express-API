@@ -3,7 +3,6 @@ const session = require("express-session");
 const path = require('path');
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
-const cookieSession = require("cookie-session");
 const passport = require("passport");
 
 const mongoRouter = require("./src/main/javascript/router/mongoRouter");
@@ -24,10 +23,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-// app.use(cookieSession({
-//   maxAge: 24 * 60 * 60 * 1000,
-//   keys: [process.env.COOKIE_SESSION_KEY]
-// }));
 app.use(passport.initialize());
 app.use(passport.session());
 

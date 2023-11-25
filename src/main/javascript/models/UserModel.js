@@ -3,9 +3,6 @@ const bcrypt = require("bcrypt");
 const {isEmail} = require("validator");
 
 const userSchema = mongoose.Schema({
-  googleId: {
-    type: String
-  },
   username: {
     type: String,
     required: [true, "Please enter an username"],
@@ -25,6 +22,15 @@ const userSchema = mongoose.Schema({
   created_date: {
     type: Date,
     default: Date.now
+  },
+  googleId: {
+    type: String
+  },
+  githubId: {
+    type: String
+  },
+  facebookId: {
+    type: String
   }
 });
 

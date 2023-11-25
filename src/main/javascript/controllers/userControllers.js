@@ -1,12 +1,10 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config();
 
 const User = require("../models/UserModel");
 
 const DAY = 24 * 60 * 60;
-
-dotenv.config();
 
 const signup = async (req, res) => {
   const { username, email, password } = req.body;
