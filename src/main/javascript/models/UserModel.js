@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const {isEmail} = require("validator");
 
-const UserSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
+  googleId: {
+    type: String
+  },
   username: {
     type: String,
     required: [true, "Please enter an username"],
@@ -25,13 +28,13 @@ const UserSchema = mongoose.Schema({
   }
 });
 
-UserSchema.pre('save', async function(next) {
+userSchema.pre('save', async function(next) {
   const salt = await bcrypt.genSalt();
   this.password = bcrypt.hashSync(this.password, salt);
   next();
 });
 
-UserSchema.statics.login = async function(email, password) {
+userSchema.statics.login = async function(email, password) {
   const user = await this.findOne({ email });
   if (user) {
     const auth = await bcrypt.compare(password, user.password)
@@ -41,4 +44,4 @@ UserSchema.statics.login = async function(email, password) {
   throw Error("Incorrect email");
 };
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", userSchema);

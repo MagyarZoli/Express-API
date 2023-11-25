@@ -3,8 +3,6 @@ const usernameError = document.querySelector(".username.error");
 const emailError = document.querySelector(".email.error");
 const passwordError = document.querySelector(".password.error");
 
-const database = "mongo";
-
 form.addEventListener("submit", async event => {
   event.preventDefault();
   usernameError.textContent = "";
@@ -14,18 +12,19 @@ form.addEventListener("submit", async event => {
   const email = form.email.value;
   const password = form.password.value;
   try {
-    const res = await fetch(`/${database}/signup`, {
+    const res = await fetch(`/signup`, { // signup.js:15 POST http://localhost:3000/signup 400 (Bad Request)
       method: "POST",
       body: JSON.stringify({ username, email, password }),
       headers: { "Content-Type": "application/json" }
     });
     const data = await res.json();
+    console.log(data); // Log the response for debugging
     if (data.errors) {
       usernameError.textContent = data.errors.username;
       emailError.textContent = data.errors.email;
       passwordError.textContent = data.errors.password;
     }
-    if (data.user) location.assign(`/${database}/login`);
+    if (data.user) location.assign(`/login`);
   } catch (err) {
     console.log(err);
   }

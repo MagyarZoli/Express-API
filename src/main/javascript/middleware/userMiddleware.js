@@ -5,20 +5,18 @@ const User = require("../models/UserModel");
 
 dotenv.config();
 
-const database = "mongo";
-
 const requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, `${process.env.JWT_SECRET_KEY}`, (err, decodedToken) => {
       if (err) {
-        res.redirect(`/${database}/login`);
+        res.redirect(`/login`);
       } else {
         next();
       }
     });
   } else {
-    res.redirect(`/${database}/login`);
+    res.redirect(`/login`);
   }
 };
 

@@ -1,22 +1,38 @@
 const express = require("express");
+const session = require("express-session");
 const path = require('path');
+const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 
-const objectRouter = require("./src/main/javascript/router/objectRouter");
 const mongoRouter = require("./src/main/javascript/router/mongoRouter");
-const UserMiddleware = require("./src/main/javascript/middleware/userMiddleware");
+const userMiddleware = require("./src/main/javascript/middleware/userMiddleware");
+const passportSetup = require("./src/main/javascript/config/passportSetup");
 
 const app = express();
 const port = 3000;
 
+dotenv.config();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(express.static("public"));
+app.use(cookieParser());
+app.use(session({
+  secret: process.env.COOKIE_SESSION_KEY,
+  resave: false,
+  saveUninitialized: false
+}));
+// app.use(cookieSession({
+//   maxAge: 24 * 60 * 60 * 1000,
+//   keys: [process.env.COOKIE_SESSION_KEY]
+// }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(UserMiddleware.checkUser);
-app.use("/object", objectRouter);
-app.use("/mongo", mongoRouter);
+app.use(userMiddleware.checkUser);
+app.use(mongoRouter);
 
 app.set("views", path.join(__dirname, "views/ejs"));
 app.set("view engine", "ejs");

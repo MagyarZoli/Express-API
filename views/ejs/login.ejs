@@ -3,11 +3,12 @@
     <h2>Log in</h2>
     <input type="text" id="email" name="email" required />
     <label for="email">Email</label>
-    <div class="email error"></div>
+    <br>
     <input type="password" id="password" name="password" required />
     <label for="password">Password</label>
-    <div class="password error"></div>
+    <div class="login error"></div>
     <button>Log in</button>
   </form>
+  <%- include("partials/oath"); %>
   <script src="/js/login.js"></script>
 <%- include("partials/footer"); %>

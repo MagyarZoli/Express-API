@@ -12,13 +12,6 @@ const signup = async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const user = await User.create({ username, email, password });
-
-    const token = createToken(user._id);
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      maxAge: 1000 * 3 * DAY
-    });
-
     return res.status(201).json({ user });
   } catch (err) {
     const errors = handleErrors(err);
@@ -49,9 +42,9 @@ const createToken = id => {
 };
 
 const handleErrors = (err) => {
-  let errors = {username: "", email: "", password: ""};
-  if (err.message === "Incorrect email") errors.email = "That email is not registered";
-  if (err.message === "Incorrect password") errors.password = "That password is incorrect";
+  let errors = {username: "", email: "", password: "", login: ""};
+  if (err.message === "Incorrect email") errors.login = "That email is not registered";
+  if (err.message === "Incorrect password") errors.login = "That email or password is incorrect";
   if (err.code === 11000) errors.email = "That email is already registered";
   if (err.message.includes("User validation failed")) {
     Object.values(err.errors).forEach(({properties}) => {
@@ -64,5 +57,6 @@ const handleErrors = (err) => {
 module.exports = {
   signup,
   login,
-  logout
+  logout,
+  createToken
 };
