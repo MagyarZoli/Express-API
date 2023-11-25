@@ -6,13 +6,12 @@
 cd ..
 npm init -y
 npm i express nodemon dotenv
-npm i --save-dev @babel/core @babel/cli @babel/preset-env @babel/node jest supertest
-npm i eslint -D
-npm i jest -D
+npm i --save-dev @babel/core @babel/cli @babel/preset-env @babel/node jest eslint supertest cross-env
 
 babelrc=".babelrc"
 babelrcContent="{
-  \"presets\": [\"@babel/preset-env\"]
+  \"presets\": [\"@babel/preset-env\"],
+  \"plugins\": [\"@babel/plugin-syntax-import-assertions\"]
 }"
 echo "$babelrcContent" > "$babelrc"
 
