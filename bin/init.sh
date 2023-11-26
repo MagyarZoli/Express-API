@@ -5,8 +5,6 @@
 
 cd ..
 npm init -y
-npm i express nodemon dotenv
-npm i --save-dev @babel/core @babel/cli @babel/preset-env @babel/node jest eslint supertest cross-env
 
 babelrc=".babelrc"
 babelrcContent="{

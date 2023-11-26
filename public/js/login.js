@@ -13,9 +13,7 @@ form.addEventListener("submit", async event => {
       headers: {"Content-Type": "application/json"}
     });
     const data = await res.json();
-    if (data.errors) {
-      loginError.textContent = data.errors.login;
-    }
+    if (data.errors) loginError.textContent = data.errors.login;
     if (data.user) location.assign("/");
   } catch (err) {
     console.log(err);

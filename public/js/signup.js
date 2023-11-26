@@ -12,13 +12,12 @@ form.addEventListener("submit", async event => {
   const email = form.email.value;
   const password = form.password.value;
   try {
-    const res = await fetch(`/signup`, { // signup.js:15 POST http://localhost:3000/signup 400 (Bad Request)
+    const res = await fetch(`/signup`, {
       method: "POST",
       body: JSON.stringify({ username, email, password }),
       headers: { "Content-Type": "application/json" }
     });
     const data = await res.json();
-    console.log(data); // Log the response for debugging
     if (data.errors) {
       usernameError.textContent = data.errors.username;
       emailError.textContent = data.errors.email;
